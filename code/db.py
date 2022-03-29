@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # DBへの接続設定
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.ext.declarative import declarative_base,as_declarative
 from sqlalchemy.orm import sessionmaker, scoped_session
 
 
@@ -30,10 +30,11 @@ ENGINE = create_engine(
 #     # ORM実行時の設定。自動コミットするか、自動反映するか
 #     sessionmaker(
 #         autocommit=False,
-#         autoflush=True,
+#         autoflush=False,
 #         bind=ENGINE
 #     )
 # )
+
 
 # Sessionの作成
 session = sessionmaker(
@@ -42,6 +43,12 @@ session = sessionmaker(
         bind=ENGINE
     )
 
+@as_declarative()
+class Base(object):
+    @declared_attr
+    def __tablename__(cls):
+        return cls.__name__.lower()
+    
 
 # # modelで使用する
 # Base = declarative_base()
