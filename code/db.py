@@ -25,32 +25,20 @@ ENGINE = create_engine(
     echo=True
 )
 
-# # Sessionの作成
-# session = scoped_session(
-#     # ORM実行時の設定。自動コミットするか、自動反映するか
-#     sessionmaker(
-#         autocommit=False,
-#         autoflush=False,
-#         bind=ENGINE
-#     )
-# )
-
-
 # Sessionの作成
-session = sessionmaker(
+session = scoped_session(
+    # ORM実行時の設定。自動コミットするか、自動反映するか
+    sessionmaker(
         autocommit=False,
         autoflush=False,
         bind=ENGINE
     )
+)
 
-@as_declarative()
-class Base(object):
-    @declared_attr
-    def __tablename__(cls):
-        return cls.__name__.lower()
-    
 
-# # modelで使用する
-# Base = declarative_base()
-# # DB接続用のセッションクラス、インスタンスが作成されると接続する
-# Base.query = session.query_property()
+
+
+# modelで使用する
+Base = declarative_base()
+# DB接続用のセッションクラス、インスタンスが作成されると接続する
+Base.query = session.query_property()

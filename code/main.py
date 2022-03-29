@@ -18,6 +18,7 @@ app.add_middleware(
 # ----------APIの定義------------
 @app.get("/users")
 def read_users():
+    
     users = session.query(UserTable).all()
     return users
 
