@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # DBへの接続設定
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base,as_declarative
+from sqlalchemy.ext.declarative import declarative_base,as_declarative,declared_attr
 from sqlalchemy.orm import sessionmaker, scoped_session
 
 
