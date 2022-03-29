@@ -3,3 +3,6 @@ sqlalchemy
 uvicorn
 fastapi
 requests
+asyncio
+confluent_kafka
+aiokafka
